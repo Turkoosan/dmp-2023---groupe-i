@@ -65,15 +65,6 @@ class _MyAppState extends State<MyApp> {
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Email'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
                     decoration: InputDecoration(labelText: 'Password'),
                     obscureText: true,
                     validator: (value) {
