@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthentificationController extends Controller
 {
@@ -115,5 +116,60 @@ class AuthentificationController extends Controller
     }
 
 
+    public function profile(Request $request): JsonResponse
+    {
+
+        return response()->json([
+            "email" => $request->user()->email,
+            "password" => "Profile utilisateur",
+        ]);
+    }
+
+
+    public function edit(Request $request): JsonResponse
+    {
+        try {
+            $reuperationReq = $request->all();
+            $validator = Validator::make($reuperationReq, [
+                "email" => "email|unique:user,email," . $request->user()->id,
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    "email" => false,
+                    "password" => "Validation incorrecte",
+                    "errors" => $validator->errors(),
+                ], 422);
+            }
+
+            $request->user()->update($reuperationReq);
+
+            return response()->json([
+                "email" => true,
+                "password" => "Connected",
+                "data" => $request->user(),
+            ]);
+
+        } catch (\Throwable $throwable) {
+            return response()->json([
+                "status" => false,
+                "message" => $throwable->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function logout(Request $request): JsonResponse
+    {// Get bearer token from the request
+        $accessToken = $request->bearerToken();
+
+        // Get access token from database
+        $token = PersonalAccessToken::findToken($accessToken);
+
+        // Revoke token
+        $token->delete();
+
+        Auth::logout();
+        return response()->json(['message' => 'Logged Out'], 200);
+    }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -44,5 +45,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception): \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+    {
+        return response()->json([
+            "status" => false,
+            "errCode" => 200,
+            "message" => "user not authenticate",
+        ]);
     }
 }
