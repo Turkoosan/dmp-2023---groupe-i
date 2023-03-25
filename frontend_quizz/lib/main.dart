@@ -16,15 +16,17 @@ class _MyAppState extends State<MyApp> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _name = '';
+  String _email = '';
   String _password = '';
 
   void _submitForm() async {
-    final response = await http.post(Uri.parse('http://localhost:8000/auth/register'),
+    final response = await http.post(Uri.parse('http://localhost:8000/api/auth/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
         'name': _name,
+        'email': _email,
         'password': _password,
       }),
     );
@@ -62,6 +64,18 @@ class _MyAppState extends State<MyApp> {
                     },
                     onSaved: (value) {
                       _name = value!;
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Email'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _email = value!;
                     },
                   ),
                   TextFormField(
