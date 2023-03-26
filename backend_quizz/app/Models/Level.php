@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nom',
+        'difficultes',
+        'unlocked',
+    ];
+
+    protected $casts = [
+        'difficultes' => 'string',
+        'unlocked' => 'boolean',
+    ];
 }
