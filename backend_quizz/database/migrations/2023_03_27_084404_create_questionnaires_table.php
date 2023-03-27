@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')
+                ->references('id')
+                ->on('questions')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('theme_id');
             $table->foreign('theme_id')->references('id')->on('themes');
             $table->timestamps();
