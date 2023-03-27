@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->json('questions');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
