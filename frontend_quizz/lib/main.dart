@@ -19,6 +19,34 @@ class _MyAppState extends State<MyApp> {
   String _email = '';
   String _password = '';
 
+  Future<void> _showMyDialog() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('201'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text('This is a demo alert dialog.'),
+              Text('Would you like to approve of this message?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Approve'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
   void _submitForm() async {
     final response = await http.post(Uri.parse('http://localhost:8000/api/auth/register'),
       headers: <String, String>{
@@ -32,9 +60,14 @@ class _MyAppState extends State<MyApp> {
     );
 
     if (response.statusCode == 201) {
-      // handle successful registration
-    } else {
+      print("OUI");  
+    }
+     else {
+      print("NON");
+      print(response.statusCode);
+      print(response.body);
       // handle registration failure
+
     }
   }
 
