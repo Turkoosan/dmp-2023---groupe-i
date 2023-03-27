@@ -24,6 +24,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/auth/login', [\App\Http\Controllers\Api\AuthentificationController::class, 'login']);
 Route::post('/auth/register', [\App\Http\Controllers\Api\AuthentificationController::class, 'register']);
 
+
+Route::post('/ajouterTheme', [\App\Http\Controllers\Api\ThemeController::class, 'ajouterTheme']);
+Route::get('/recupererTheme', [\App\Http\Controllers\Api\ThemeController::class, 'recupererTheme']);
+
+
+Route::get('/auth/ajouterQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'ajouterQuestionnaire']);
+Route::get('/auth/supprimerQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'supprimerQuestionnaire']);
+Route::get('/auth/modifierQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'modifierQuestionnaire']);
+Route::get('/auth/recupererQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaire']);
+
+
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('auth/profile', [AuthentificationController::class , 'profile'] );
     Route::put('auth/edit_profile', [AuthentificationController::class , 'edit'] );
