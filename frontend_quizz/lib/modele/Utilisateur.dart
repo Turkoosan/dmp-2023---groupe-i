@@ -1,18 +1,19 @@
 import 'dart:core';
-import 'Recompense.dart';
+import 'Realisation.dart';
 class Utilisateur{
     int id;
     String pseudo;
     String motDepasse;
     List<int> questions = [];
     int score = 0;
-    List<Recompense> recompense = [];
+    List<Realisation> realisations = [];
 
     Utilisateur(this.id,this.pseudo,this.motDepasse);
 
-    getId(){return id;}
-    getPseudo(){return pseudo;}
-    
+    int getId(){return id;}
+    String getPseudo(){return pseudo;}
+    List<Realisation> getRealisations()=> realisations;
+    void ajouterRealisation(Realisation realisation)=> realisations.add(realisation);
     List<int> getQuestions(){ return questions;}
 
     void setMotDepasse(String motDepasse){
