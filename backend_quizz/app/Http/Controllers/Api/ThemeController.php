@@ -6,25 +6,32 @@ use App\Http\Controllers\Controller;
 use App\Models\Theme;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ThemeController extends Controller
 {
     public function ajouterTheme(Request $request): JsonResponse
     {
 
-        dd( $request->input('nom'));
         // Valider les données de la requête
         $request->validate([
-            'nom' => 'required|string|max:255|unique:themes'
+            'nom' => 'string|max:255|unique:themes'
         ]);
 
-        // Créer un nouveau thème
-        $theme = new Theme();
-        $theme->nom = $request->input('nom');
-        $theme->save();
+        try {
 
-        // Retourner une réponse JSON
-        return response()->json(['theme' => $theme], 201);
+            $json = $request->getContent();
+            $data = json_decode($json, true);
+
+            $nom = $data['nom'];
+
+            $theme = Theme::create(['nom' => $nom]);
+
+            return response()->json(['theme' => $theme], 201);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function recupererTheme(): JsonResponse

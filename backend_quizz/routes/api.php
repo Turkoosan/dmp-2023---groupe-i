@@ -29,10 +29,11 @@ Route::post('/ajouterTheme', [\App\Http\Controllers\Api\ThemeController::class, 
 Route::get('/recupererTheme', [\App\Http\Controllers\Api\ThemeController::class, 'recupererTheme']);
 
 
-Route::get('/auth/ajouterQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'ajouterQuestionnaire']);
-Route::get('/auth/supprimerQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'supprimerQuestionnaire']);
-Route::get('/auth/modifierQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'modifierQuestionnaire']);
-Route::get('/auth/recupererQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaire']);
+
+Route::get('/ajouterQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'ajouterQuestionnaire']);
+Route::get('/supprimerQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'supprimerQuestionnaire']);
+Route::get('/modifierQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'modifierQuestionnaire']);
+Route::get('/recupererQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaire']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
