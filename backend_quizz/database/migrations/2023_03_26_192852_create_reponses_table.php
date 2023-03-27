@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('reponses', function (Blueprint $table) {
             $table->id();
+            $table->string('text');
+            $table->boolean('correctAnswer');
             $table->timestamps();
         });
     }
