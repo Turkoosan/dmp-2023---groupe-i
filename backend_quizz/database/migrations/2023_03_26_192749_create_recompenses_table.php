@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('recompenses', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->text('description');
+            $table->integer('score')->default(0);
+            $table->unsignedBigInteger('level_id');
+            $table->foreign('level_id')->references('id')->on('levels');
             $table->timestamps();
         });
     }
