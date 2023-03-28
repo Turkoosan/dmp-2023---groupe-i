@@ -4,7 +4,7 @@ class AuthentificationService {
 
   AuthentificationService();
   
-  Future<int> post(String nom, String email, String mp) async
+  Future<http.Response> post(String nom, String email, String mp) async
   {
     Uri uri = Uri.http('localhost:8000','/api/auth/register');
 
@@ -20,12 +20,12 @@ class AuthentificationService {
     var reponse =  await requete ;
     //var data1_response = jsonDecode(rep.body);
 
-    return reponse.statusCode; 
+    return reponse; 
   
   }
 
 
-  Future<int> login(String email , String mp) async
+  Future<http.Response> login(String email , String mp) async
   {
     
     Uri uri = Uri.http('localhost:8000','/api/auth/login');
@@ -40,7 +40,7 @@ class AuthentificationService {
     
     var reponse = await requete ;
     //var data1_response = jsonDecode(rep.body);
-    return reponse.statusCode;
+    return reponse;
   }
 
   Future<int> supprimer(String email) async 
