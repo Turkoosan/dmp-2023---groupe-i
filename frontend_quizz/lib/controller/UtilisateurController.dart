@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/modele/Utilisateur.dart';
 import 'package:frontend_quizz/service/AuthentifactionService.dart';
@@ -44,23 +46,34 @@ class UtilisateurController
     utilisateur.seId(id) ; 
     utilisateur.setPseudo(pseudo) ;
     utilisateur.setMotDepasse(motDepasse);
-    //utilisateur = Utilisateur(id, pseudo, motDepasse);
   }
-  Future<http.Response> inscription(String nom, String email , String mp) async {
+  Future<int> inscription(String nom, String pseudo , String motDepasse) async {
     AuthentificationService authentificationService = AuthentificationService();
-    Future<http.Response> response = authentificationService.post(nom, email, mp);
-    return response;
+    Future<http.Response> response = authentificationService.post(nom, pseudo, motDepasse);
+    var reponse = await response;
+    if(reponse.statusCode == 200)
+      {
+        var donnees = jsonDecode(reponse.body);
+        setUtilisateur(0, pseudo, motDepasse);
+        setToken(donnees['token']);
+        print('controller : ,${reponse.body}');
+      }
+
+      return reponse.statusCode;
   }
 
-  Future<http.Response> connexion(String pseudo , String motDepasse) async {
+  Future<int> connexion(String pseudo , String motDepasse) async {
     AuthentificationService authentificationService = AuthentificationService();
   
     Future<http.Response> response = authentificationService.login(pseudo, motDepasse);
     var reponse = await response;
-    if(reponse.statusCode == 200)
+    if(reponse.statusCode == 200){
+      var donnees = jsonDecode(reponse.body);
       setUtilisateur(0, pseudo, motDepasse);
-
-    return response;
+      setToken(donnees['token']);
+      print(reponse.body);
+    }
+    return reponse.statusCode;
   }
   
    

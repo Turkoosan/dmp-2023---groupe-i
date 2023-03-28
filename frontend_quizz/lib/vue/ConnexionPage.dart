@@ -12,27 +12,23 @@ class ConnexionPage extends StatelessWidget {
 
   String _email = '';
   String _motDepasse = '';
-  /** 
-   void _submitForm() async {
+  bool _validation = false;
+  
+   Future<void> _submitForm() async {
     
-    Future<http.Response> response = utilisateurController.connexion(_email, _motDepasse);
-    var reponse = await response; 
-    if (reponse.statusCode == 200) {
-      print('OUI ${reponse.body}');  
-      utilisateurController.goToPageMenu();
+    Future<int> codeStatusResponse = utilisateurController.connexion(_email, _motDepasse);
+    var code = await codeStatusResponse;
+    if (code == 200) {
+      _validation = true;
     }
-     else {
-      print('NON ${reponse.body}');
-
+    else 
+    {
+      //si 401  pseudo ou mot de passe incorrect
+      //si 422 données entrée non valide
+      // Si 500 serveur indisponible
+      _validation = false;
     }
-  } **/
-
-
-  bool _submitForm(){
-    utilisateurController.setUtilisateur(0, _email, _motDepasse);
-    utilisateurController.setToken("edjizjdkziocziziczojeoi");
-    return true;
-  }
+  } 
 
    @override
   Widget build(BuildContext context) {
@@ -99,11 +95,17 @@ class ConnexionPage extends StatelessWidget {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          if(_submitForm())
-                              Navigator.push(
+                          _submitForm();
+                          Future.delayed(Duration(seconds: 1),(){
+                            if(_validation){
+                             
+                              Navigator.pushReplacement(
                                 context, 
                                 MaterialPageRoute
                                 (builder: (context)=> utilisateurController.goToPageMenu()));
+                                _validation = false;
+                          }     
+                          });
                         }
                       },
                       child: Text('Connexion'),

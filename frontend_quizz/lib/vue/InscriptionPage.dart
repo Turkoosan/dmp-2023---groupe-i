@@ -12,21 +12,25 @@ class InscriptionPage extends StatelessWidget {
   String _name = '';
   String _email = '';
   String _password = '';
+  bool _validation = false;
   
    void _submitForm() async {
     
-    Future<http.Response> response = utilisateurController.inscription(_name, _email, _password);
-    var reponse = await response; 
-    if (reponse.statusCode == 201) {
-      print('OUI ${reponse.body}'); 
-      utilisateurController.goToPageMenu(); 
+    Future<int> codeStatusResponse = utilisateurController.inscription(_name, _email, _password);
+    var code =  await codeStatusResponse; 
+    if (code == 200) {
+      _validation = true;
+      print('validationPageInscription : ${_validation}');
     }
      else {
-      print('NON ${reponse.body}');
+       //si 422  échec de l'inscription
+      //si 401 un utilisateur avec ce pseudo existe déjà
+      // Si 500 serveur indisponible
+      _validation = false;
 
     }
 
-    
+
   }
 
    @override
@@ -49,7 +53,7 @@ class InscriptionPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Go back!'),
+                    child: const Text('<-'),
                   ),
                   TextFormField(
                     decoration: InputDecoration(labelText: 'Name'),
@@ -95,6 +99,17 @@ class InscriptionPage extends StatelessWidget {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submitForm();
+                          
+                          Future.delayed(Duration(seconds: 1),(){
+                            if(_validation){
+                        
+                              Navigator.pushReplacement(
+                                context, 
+                                MaterialPageRoute(builder: (context) => utilisateurController.goToPageMenu())
+                              );
+                              _validation = false;
+                          }
+                          });
                         }
                       },
                       child: Text('Register'),

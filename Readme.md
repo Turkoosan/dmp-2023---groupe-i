@@ -14,7 +14,7 @@
     -   LOG_LEVEL=debug
 
     -   DB_CONNECTION=sqlite
- - éxecuter php artisan migrate dans le but d'initialiser la base de donnéé
+ - éxecuter php artisan migrate dans le but d'initialiser la base de donnée
  - éxecuter php artisan serve afin de démarrer le serveur
 
 
@@ -36,3 +36,7 @@
         - UtilisateurController (complété à 5%)
         - UtilisateurQuestionnaire (complété à 0%)
     - Il reste à créer les vue et les liées au controlleur          
+- 1) le mvc a été mis en place avec succès sur UtilisateurController    :
+    - a) on peut inscrire un utilisateur sur la vue (InscriptionPage )
+    - b) on peut se connecter sur la vue (ConnexionPage)
+    - Après l'action a ou b on est redirigé vers la vue menu (MenuPage)
