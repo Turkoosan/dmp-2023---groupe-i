@@ -12,18 +12,8 @@ class Level extends Model
     protected $fillable = [
         'nom',
         'difficultes',
-        'unlocked',
+        'unlocked'
     ];
-
-    protected $casts = [
-        'difficultes' => 'string',
-        'unlocked' => 'boolean',
-    ];
-
-    public function recompense()
-    {
-        return $this->belongsTo(Recompense::class);
-    }
 
     public function questions()
     {
