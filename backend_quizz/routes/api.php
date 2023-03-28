@@ -28,9 +28,12 @@ Route::post('/auth/register', [\App\Http\Controllers\Api\AuthentificationControl
 Route::post('/ajouterTheme', [\App\Http\Controllers\Api\ThemeController::class, 'ajouterTheme']);
 Route::get('/recupererTheme', [\App\Http\Controllers\Api\ThemeController::class, 'recupererTheme']);
 
+Route::post('/ajouterLevel', [\App\Http\Controllers\Api\LevelController::class, 'ajouterLevel']);
+Route::get('/recupererLevel', [\App\Http\Controllers\Api\LevelController::class, 'recupererLevel']);
 
 
-Route::get('/ajouterQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'ajouterQuestionnaire']);
+
+Route::post('/ajouterQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'ajouterQuestionnaire']);
 Route::get('/supprimerQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'supprimerQuestionnaire']);
 Route::get('/modifierQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'modifierQuestionnaire']);
 Route::get('/recupererQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaire']);

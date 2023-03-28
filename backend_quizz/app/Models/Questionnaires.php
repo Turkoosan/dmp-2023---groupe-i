@@ -9,9 +9,17 @@ class Questionnaires extends Model
 {
     use HasFactory;
 
-    public function themes()
+
+    protected $fillable = ['theme_id'];
+
+    public function questions()
     {
-        return $this->belongsToMany(Theme::class);
+        return $this->belongsToMany(Question::class);
+    }
+
+    public function theme()
+    {
+        return $this->belongsTo(Theme::class);
     }
 
 }

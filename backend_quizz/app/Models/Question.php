@@ -9,13 +9,15 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['problematique', 'level_id'];
+
     public function level()
     {
         return $this->belongsTo(Level::class);
     }
 
-    public function reponse()
+    public function questionnaires()
     {
-        return $this->hasMany(Reponse::class);
+        return $this->belongsToMany(Questionnaires::class);
     }
 }
