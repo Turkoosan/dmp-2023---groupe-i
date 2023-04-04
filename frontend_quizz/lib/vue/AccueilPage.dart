@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/controller/UtilisateurController.dart';
 
-class ConnexionPage extends StatelessWidget {
+class AccueilPage extends StatelessWidget {
   late UtilisateurController utilisateurController;
-  ConnexionPage(this.utilisateurController);
+  AccueilPage(this.utilisateurController);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,12 @@ class ConnexionPage extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.add),
                   color: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute
+                          (builder: (context)=> utilisateurController.goTocreateQuestionnaire()));
+                  },
                 ),
               ),
             ],

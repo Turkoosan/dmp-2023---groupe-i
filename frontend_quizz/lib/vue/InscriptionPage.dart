@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/controller/UtilisateurController.dart';
-import 'package:frontend_quizz/modele/Utilisateur.dart';
 import 'package:http/http.dart' as http;
 
 class InscriptionPage extends StatelessWidget {
@@ -105,7 +104,7 @@ class InscriptionPage extends StatelessWidget {
                         
                               Navigator.pushReplacement(
                                 context, 
-                                MaterialPageRoute(builder: (context) => utilisateurController.goToPageMenu())
+                                MaterialPageRoute(builder: (context) => utilisateurController.goToPageAccueil())
                               );
                               _validation = false;
                           }

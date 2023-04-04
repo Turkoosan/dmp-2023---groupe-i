@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/controller/UtilisateurController.dart';
-import 'package:frontend_quizz/modele/Utilisateur.dart';
-import 'package:frontend_quizz/vue/InscriptionPage.dart';
 import 'package:http/http.dart' as http;
 
 class ConnexionPage extends StatelessWidget {
@@ -102,7 +100,7 @@ class ConnexionPage extends StatelessWidget {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute
-                                    (builder: (context)=> utilisateurController.goToPageMenu()));
+                                    (builder: (context)=> utilisateurController.goToPageAccueil()));
                               _validation = false;
                             }
                           });
