@@ -1,30 +1,28 @@
 import 'dart:convert';
+
 import 'package:frontend_quizz/modele/Utilisateur.dart';
 import 'package:frontend_quizz/service/AuthentifactionService.dart';
 import 'package:frontend_quizz/vue/CreationQuestionnaire.dart';
 import 'package:frontend_quizz/vue/InscriptionPage.dart';
-import 'package:frontend_quizz/vue/MenuPage.dart';
-import 'package:frontend_quizz/vue/AccueilPage.dart';
 import 'package:http/http.dart' as http;
 import '../vue/ConnexionPage.dart';
+import '../vue/AccueilPage.dart';
 
 class UtilisateurController
 {
   Utilisateur utilisateur = Utilisateur.parDefaut();
   late InscriptionPage inscriptionPage;
   late ConnexionPage connexionPage;
-  late MenuPage menuPage;
-  late CreationQuestionnaire createQuestionnaire;
   late AccueilPage accueilPage;
+  late CreationQuestionnaire creationQuestionnaire;
   late var token ;
   UtilisateurController()
   {
     inscriptionPage = InscriptionPage(this);
     connexionPage = ConnexionPage(this);
-    menuPage = MenuPage(this);
     accueilPage = AccueilPage(this);
-    createQuestionnaire = CreationQuestionnaire(this);
-    
+    creationQuestionnaire = CreationQuestionnaire(this);
+
   }
 
   InscriptionPage goToPageInscription()
@@ -44,7 +42,7 @@ class UtilisateurController
 
   CreationQuestionnaire goTocreateQuestionnaire()
   {
-    return createQuestionnaire;
+    return creationQuestionnaire;
   }
   
 
@@ -84,7 +82,4 @@ class UtilisateurController
     }
     return reponse.statusCode;
   }
-
-
-
 }
