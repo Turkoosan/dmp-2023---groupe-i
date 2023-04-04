@@ -98,8 +98,8 @@ class AccueilPage extends StatelessWidget {
       color: Colors.white,
     ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Centrer les éléments horizontalement
-      crossAxisAlignment: CrossAxisAlignment.center, // Centrer les éléments verticalement
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const CircleAvatar(
             radius: 100,
