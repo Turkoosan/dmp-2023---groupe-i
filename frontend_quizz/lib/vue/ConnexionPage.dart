@@ -102,7 +102,7 @@ class ConnexionPage extends StatelessWidget {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute
-                                    (builder: (context)=> utilisateurController.goToPageMenu()));
+                                    (builder: (context)=> utilisateurController.goToPageAccueil()));
                               _validation = false;
                             }
                           });

@@ -105,7 +105,7 @@ class InscriptionPage extends StatelessWidget {
                         
                               Navigator.pushReplacement(
                                 context, 
-                                MaterialPageRoute(builder: (context) => utilisateurController.goToPageMenu())
+                                MaterialPageRoute(builder: (context) => utilisateurController.goToPageAccueil())
                               );
                               _validation = false;
                           }

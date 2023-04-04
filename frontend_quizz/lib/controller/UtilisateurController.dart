@@ -7,6 +7,7 @@ import 'package:frontend_quizz/vue/InscriptionPage.dart';
 import 'package:frontend_quizz/vue/MenuPage.dart';
 import 'package:http/http.dart' as http;
 import '../vue/ConnexionPage.dart';
+import '../vue/AccueilPage.dart';
 
 class UtilisateurController
 {
@@ -14,12 +15,14 @@ class UtilisateurController
   late InscriptionPage inscriptionPage;
   late ConnexionPage connexionPage;
   late MenuPage menuPage;
+  late AccueilPage accueilPage;
   late var token ;
   UtilisateurController()
   {
     inscriptionPage = InscriptionPage(this);
     connexionPage = ConnexionPage(this);
     menuPage = MenuPage(this);
+    accueilPage = AccueilPage(this);
     
   }
 
@@ -33,9 +36,9 @@ class UtilisateurController
     return connexionPage;
   }
 
-   MenuPage goToPageMenu()
+   AccueilPage goToPageAccueil()
   {
-    return menuPage;
+    return accueilPage;
   }
   
 

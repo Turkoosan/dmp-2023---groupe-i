@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/controller/UtilisateurController.dart';
 
-class ConnexionPage extends StatelessWidget {
+class AccueilPage extends StatelessWidget {
   late UtilisateurController utilisateurController;
-  ConnexionPage(this.utilisateurController);
+  AccueilPage(this.utilisateurController);
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +93,8 @@ class ConnexionPage extends StatelessWidget {
       color: Colors.white,
     ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Centrer les éléments horizontalement
-      crossAxisAlignment: CrossAxisAlignment.center, // Centrer les éléments verticalement
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const CircleAvatar(
             radius: 100,
