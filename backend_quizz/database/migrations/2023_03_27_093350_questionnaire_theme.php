@@ -11,14 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questionnaire_theme', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('questionnaire_id');
-            $table->foreign('questionnaire_id')->references('id')->on('questionnaires')->onDelete('cascade');
-            $table->unsignedBigInteger('theme_id');
-            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
+        Schema::create('questionnaire_theme', function ($table) {
+            $table->integer('questionnaire_id')
+                    ->unsigned()
+                    ->index();
+            $table->foreign('questionnaire_id')
+                    ->references('id')
+                    ->on('questionnaires')
+                    ->onDelete('cascade');
+            
+            $table->integer('theme_id')
+                    ->unsigned()
+                    ->index();
+            $table->foreign('theme_id')
+                    ->references('id')
+                    ->on('themes')
+                    ->onDelete('cascade');
             $table->timestamps();
+
+            $table->primary(['questionnaire_id','theme_id']);
         });
+
+
     }
 
     /**
@@ -26,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('questionnaire_theme');
     }
 };

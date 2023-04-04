@@ -47,4 +47,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Realisation::class);
     }
 
+    /**Relation 1..N avec Questionnaire */
+    public function questionnaires()
+    {
+        return $this->hasMany(Questionnaire::class);
+    }
+
 }

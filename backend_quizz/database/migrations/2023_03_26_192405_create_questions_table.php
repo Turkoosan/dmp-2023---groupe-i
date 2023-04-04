@@ -14,10 +14,15 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('problematique');
-            $table->unsignedBigInteger('level_id');
+            $table->unsignedBigInteger('level_id')->nullable();
             $table->foreign('level_id')
                 ->references('id')
                 ->on('levels');
+
+            $table->unsignedBigInteger('questionnaire_id')->nullable();
+            $table->foreign('questionnaire_id')
+                ->references('id')
+                ->on('questionnaires');
             $table->timestamps();
         });
     }

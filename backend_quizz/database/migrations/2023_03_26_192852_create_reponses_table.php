@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('reponses', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
-            $table->boolean('correctAnswer');
-            $table->unsignedBigInteger('question_id');
+            $table->string('reponse');
+            $table->boolean('est_correct');
+            $table->Integer('question_id')
+                ->unsigned()
+                ->nullable();
             $table->foreign('question_id')
                 ->references('id')
                 ->on('questions')

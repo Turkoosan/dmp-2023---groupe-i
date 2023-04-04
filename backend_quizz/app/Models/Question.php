@@ -9,7 +9,13 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['problematique', 'level_id'];
+    protected $fillable = ['problematique'];
+    
+    /** Relation 1..N entre Question et Reponse  */
+    public function reponses()
+    {
+        return $this->hasMany(Reponse::class);
+    }
 
     public function level()
     {
@@ -18,6 +24,6 @@ class Question extends Model
 
     public function questionnaires()
     {
-        return $this->belongsToMany(Questionnaires::class);
+        return $this->belongsTo(Questionnaire::class);
     }
 }

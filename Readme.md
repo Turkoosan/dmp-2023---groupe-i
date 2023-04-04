@@ -14,8 +14,8 @@
     -   LOG_LEVEL=debug
 
     -   DB_CONNECTION=sqlite
- - éxecuter php artisan migrate dans le but d'initialiser la base de donnée
- - éxecuter php artisan serve afin de démarrer le serveur
+ - éxecuter [php artisan migrate] dans le but d'initialiser la base de donnée
+ - éxecuter [php artisan serve] afin de démarrer le serveur
 
 
 ***Configuration de flutter***
@@ -40,3 +40,18 @@
     - a) on peut inscrire un utilisateur sur la vue (InscriptionPage )
     - b) on peut se connecter sur la vue (ConnexionPage)
     - Après l'action a ou b on est redirigé vers la vue menu (MenuPage)
+
+
+***Avancée de la database***
+- 04/04 à 2h18 :
+    - relation N..N (Many to Many ):
+        - table theme et questionnaires fonctionnel
+    - relation 1..N (One to Many ):
+        - table user et questionnaire fonctionnel
+        - table questionnaire et question fonctionnel
+        - table question et reponse fonctionnel
+
+***Comment tester les relations ?***
+- effectuer un [php artisan db:seed] et regarder le résultat sur votre base de donnée
+
+

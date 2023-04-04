@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Theme extends Model
 {
     use HasFactory;
-    protected $fillable = ['nom'];
+    protected $fillable = ['thematique'];
 
     public function questionnaires()
     {
-        return $this->belongsToMany(Questionnaires::class);
+        return $this->belongsToMany(Questionnaire::class);
     }
 }
