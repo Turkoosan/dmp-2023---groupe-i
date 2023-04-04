@@ -13,24 +13,24 @@ class ConnexionPage extends StatelessWidget {
   String _email = '';
   String _motDepasse = '';
   bool _validation = false;
-  
-   Future<void> _submitForm() async {
-    
+
+  Future<void> _submitForm() async {
+
     Future<int> codeStatusResponse = utilisateurController.connexion(_email, _motDepasse);
     var code = await codeStatusResponse;
     if (code == 200) {
       _validation = true;
     }
-    else 
+    else
     {
       //si 401  pseudo ou mot de passe incorrect
       //si 422 données entrée non valide
       // Si 500 serveur indisponible
       _validation = false;
     }
-  } 
+  }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Authentification',
@@ -46,25 +46,25 @@ class ConnexionPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
 
-                  IconButton(
-                    tooltip: "s'inscrire",
-                    onPressed:()=>
-                    {
-                      Navigator.push(
-                        context, MaterialPageRoute(builder: (context)=> utilisateurController.goToPageInscription()
-                        ),
-                      ) 
-                     }, 
-                    icon: Icon(Icons.app_registration)
-                  )  
-                ]
-                ,
-              ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      IconButton(
+                          tooltip: "s'inscrire",
+                          onPressed:()=>
+                          {
+                            Navigator.push(
+                              context, MaterialPageRoute(builder: (context)=> utilisateurController.goToPageInscription()
+                            ),
+                            )
+                          },
+                          icon: Icon(Icons.app_registration)
+                      )
+                    ]
+                    ,
+                  ),
                   TextFormField(
                     decoration: InputDecoration(labelText: 'Email'),
                     validator: (value) {
@@ -98,13 +98,13 @@ class ConnexionPage extends StatelessWidget {
                           _submitForm();
                           Future.delayed(Duration(seconds: 1),(){
                             if(_validation){
-                             
+
                               Navigator.pushReplacement(
-                                context, 
-                                MaterialPageRoute
-                                (builder: (context)=> utilisateurController.goToPageMenu()));
-                                _validation = false;
-                          }     
+                                  context,
+                                  MaterialPageRoute
+                                    (builder: (context)=> utilisateurController.goToPageMenu()));
+                              _validation = false;
+                            }
                           });
                         }
                       },
@@ -114,7 +114,7 @@ class ConnexionPage extends StatelessWidget {
                 ],
               ),
             ),
-            
+
           ),
         ),
       ),

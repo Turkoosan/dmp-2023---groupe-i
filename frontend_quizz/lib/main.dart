@@ -6,9 +6,8 @@ import 'dart:convert';
 void main() {
   UtilisateurController utilisateurController = UtilisateurController();
   runApp(MaterialApp(
-    home: Scaffold(
-      body: utilisateurController.goToPageConnexion(),
-    )
+      home: Scaffold(
+        body: utilisateurController.goToPageConnexion(),
+      )
   ));
 }
-
