@@ -24,30 +24,37 @@ class QuestionnaireController extends Controller
         DB::beginTransaction();
 
         try {
-//            dd($jsonData['users']);
-//            dd($jsonData['questionnaires']);
-            // Ajout des utilisateurs
-//            if (isset($jsonData['users'])) {
-//                $usersData = $jsonData['users'];
-//                foreach ($usersData as $userData) {
-//                    $user = new User();
-//                    $user->name = $userData['name'];
-//                    $user->email = $userData['email'];
-//                    $user->password = bcrypt($userData['password']);
-//                    $user->save();
-//                }
-//            }
-//                TODO RECUPÉRER LE ID DE L'UTILISATEUR
+            // Récupération de l'id de l'utilisateur
+//            $user = $request->user();
+//            dd($user);
             // Ajout des questionnaires et questions
             if (isset($jsonData['questionnaires'])) {
                 $questionnairesData = $jsonData['questionnaires'];
-
                 foreach ($questionnairesData as $questionnaireData) {
+
+                    // Récupération du thème
+                    $theme = null;
+//                    dd($questionnaireData['themes']);
+                    if (isset($questionnaireData['themes'])) {
+                        $theme = Theme::where('thematique', $questionnaireData['themes'])->first();
+//                        dd( $theme );
+                        if (!$theme) {
+                            // Si le thème n'existe pas, on le crée
+                            $theme = new Theme();
+                            $theme->thematique = $questionnaireData['themes'];
+//                            dd($theme->thematique );
+                            $theme->save();
+                        }
+                    }
+
                     $questionnaire = new Questionnaire();
                     $questionnaire->sujet = $questionnaireData['sujet'];
+                    $questionnaire->themes_id = $theme ? $theme->id : null;
+//                    $questionnaire->user_id = $userId;
                     $questionnaire->save();
 
                     $questionsData = $questionnaireData['questions'];
+
                     foreach ($questionsData as $questionData) {
                         $question = new Question();
                         $question->problematique = $questionData['problematique'];
@@ -66,16 +73,6 @@ class QuestionnaireController extends Controller
                 }
             }
 
-            // Ajout des thèmes et lien avec les questionnaires
-            if (isset($jsonData['themes'])) {
-                $themesData = $jsonData['themes'];
-                foreach ($themesData as $themeData) {
-                    $theme = new Theme();
-                    $theme->thematique = $themeData['thematique'];
-                    $theme->save();
-                }
-            }
-
             // Commit de la transaction si tout se passe bien
             DB::commit();
 
@@ -88,14 +85,6 @@ class QuestionnaireController extends Controller
         }
     }
 
-
-    // TODO
-//    public function ajouterQuestionnaire(Request $request): JsonResponse
-//    {
-//
-//        dd($request);
-//        return response()->json(['message' => 'Questionnaire créé avec succès.'], 201);
-//    }
 
 
 

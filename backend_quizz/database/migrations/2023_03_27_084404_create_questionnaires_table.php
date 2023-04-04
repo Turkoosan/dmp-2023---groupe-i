@@ -18,6 +18,10 @@ return new class extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table->integer('themes_id')->nullable();
+            $table->foreign('themes_id')
+                ->references('id')
+                ->on('themes');
             $table->timestamps();
         });
     }

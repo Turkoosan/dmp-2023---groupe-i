@@ -15,7 +15,7 @@ class ThemeController extends Controller
 
         // Valider les données de la requête
         $request->validate([
-            'nom' => 'string|max:255|unique:themes'
+            'thematique' => 'string|max:255|unique:themes'
         ]);
 
         try {
@@ -23,9 +23,9 @@ class ThemeController extends Controller
             $json = $request->getContent();
             $data = json_decode($json, true);
 
-            $nom = $data['nom'];
+            $nom = $data['thematique'];
 
-            $theme = Theme::create(['nom' => $nom]);
+            $theme = Theme::create(['thematique' => $nom]);
 
             return response()->json(['theme' => $theme], 201);
 

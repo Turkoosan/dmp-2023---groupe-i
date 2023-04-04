@@ -24,10 +24,11 @@ class Questionnaire extends Model
         return $this->hasMany(Question::class);
     }
 
-    /** Relation N..N entre Questionnaire et Theme */    
+    /** Relation N..N entre Questionnaire et Theme */
     public function themes()
     {
         return $this->belongsToMany(Theme::class);
     }
+
 
 }
