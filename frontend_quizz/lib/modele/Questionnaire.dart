@@ -4,15 +4,16 @@ import 'dart:core';
 import 'Niveau.dart';
 
 class Questionnaire {
-    int id;
-    int id_createur;
-    String sujet;
-    Niveau niveau;
+    late int id;
+    late int id_createur;
+    late String sujet;
+    late Niveau niveau;
     List<Question> questions = [];
     List<Theme> thematiques =  [];
 
     Questionnaire(this.id,this.id_createur,this.sujet,this.niveau);
 
+    Questionnaire.parDefaut();
     //Questionnaire(this.id,this.id_createur,this.sujet,this.questions);
 
     int getId(){return id;}

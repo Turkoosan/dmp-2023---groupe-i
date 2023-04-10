@@ -99,7 +99,7 @@ class InscriptionPage extends StatelessWidget {
                           _formKey.currentState!.save();
                           _submitForm();
                           
-                          Future.delayed(Duration(seconds: 1),(){
+                          Future.delayed(const Duration(seconds: 1),(){
                             if(_validation){
                         
                               Navigator.pushReplacement(

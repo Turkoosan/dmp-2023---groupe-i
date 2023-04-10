@@ -19,7 +19,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user1 = User::create(['name'=>'a','email'=> 'a@a','password'=> "123456"]);
-        $questionnaire1 = Questionnaire::create(['sujet'=>'Relief de la mer mediterannée']);
+        $user2 = User::create(['name'=>'e','email'=> 'e@e','password'=> "123456"]);
+
+      //  $questionnaire2 = Questionnaire::create(['sujet'=>"Relief de l'atlantique"]);
+
+      //  $user1->questionnaires()->save($questionnaire2);
+
+      /**   $questionnaire1 = Questionnaire::create(['sujet'=>'Relief de la mer mediterannée']);
         $questionnaire2 = Questionnaire::create(['sujet'=>"Relief de l'atlantique"]);
 
         $theme = Theme::create(['thematique'=>'Geo']);
@@ -46,6 +52,8 @@ class DatabaseSeeder extends Seeder
 
         $theme->questionnaires()->saveMany([$questionnaire1,$questionnaire2]);
         $user1->questionnaires()->saveMany([$questionnaire1,$questionnaire2]);
+
+        **/
     }
 
 }

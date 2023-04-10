@@ -94,7 +94,7 @@ class ConnexionPage extends StatelessWidget {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submitForm();
-                          Future.delayed(Duration(seconds: 1),(){
+                          Future.delayed(const Duration(seconds: 1),(){
                             if(_validation){
 
                               Navigator.pushReplacement(

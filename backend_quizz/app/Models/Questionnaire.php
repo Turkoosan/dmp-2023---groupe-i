@@ -15,7 +15,7 @@ class Questionnaire extends Model
     /**Relation 1..N entre user et Questionnaire*/
     public function utilisateur()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /** Relation 1..N entre Questionnaire et Question */
@@ -25,9 +25,9 @@ class Questionnaire extends Model
     }
 
     /** Relation N..N entre Questionnaire et Theme */
-    public function themes()
+    public function theme()
     {
-        return $this->belongsToMany(Theme::class);
+        return $this->belongsTo(Theme::class);
     }
 
 

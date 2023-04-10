@@ -25,52 +25,59 @@ class QuestionnaireController extends Controller
 
         try {
             // Récupération de l'id de l'utilisateur
-//            $user = $request->user();
-//            dd($user);
+            $user = User::find(intval($jsonData['user_id']));
+          
             // Ajout des questionnaires et questions
             if (isset($jsonData['questionnaires'])) {
-                $questionnairesData = $jsonData['questionnaires'];
-                foreach ($questionnairesData as $questionnaireData) {
+                $questionnaireData = $jsonData['questionnaires'];
+              //  foreach ($questionnairesData as $questionnaireData) {
 
+                    
                     // Récupération du thème
                     $theme = null;
-//                    dd($questionnaireData['themes']);
                     if (isset($questionnaireData['themes'])) {
                         $theme = Theme::where('thematique', $questionnaireData['themes'])->first();
-//                        dd( $theme );
                         if (!$theme) {
                             // Si le thème n'existe pas, on le crée
                             $theme = new Theme();
                             $theme->thematique = $questionnaireData['themes'];
-//                            dd($theme->thematique );
                             $theme->save();
                         }
                     }
-
+                    
                     $questionnaire = new Questionnaire();
                     $questionnaire->sujet = $questionnaireData['sujet'];
-                    $questionnaire->themes_id = $theme ? $theme->id : null;
-//                    $questionnaire->user_id = $userId;
+                    $theme->questionnaires()->save($questionnaire);
+                    $user->questionnaires()->save($questionnaire);
+                    
                     $questionnaire->save();
+                     
+                    //la liste de question récupéré liè à un thème
+                    $questions_recupere = [];
+                    //la liste de reponnse récupéré lié à une question 
+                    $reponses_recupere = [];
 
                     $questionsData = $questionnaireData['questions'];
 
                     foreach ($questionsData as $questionData) {
-                        $question = new Question();
-                        $question->problematique = $questionData['problematique'];
-                        $question->questionnaire_id = $questionnaire->id;
-                        $question->save();
+                        $question = Question::create(['problematique'=>$questionData['problematique']]);   
+                        //Remise à null 
+                        $reponses_recupere = [];
 
                         $reponsesData = $questionData['reponses'];
                         foreach ($reponsesData as $reponseData) {
-                            $reponse = new Reponse();
-                            $reponse->reponse = $reponseData['reponse'];
-                            $reponse->est_correct = $reponseData['est_correct'];
-                            $reponse->question_id = $question->id;
-                            $reponse->save();
+                            
+                            $reponse = Reponse::create(['reponse'=>$reponseData['reponse'] , 'est_correct' =>$reponseData['est_correct']]); 
+                            array_push($reponses_recupere,$reponse);
                         }
+
+                        $question->reponses()->saveMany($reponses_recupere);
+                        array_push($questions_recupere,$question);
+
                     }
-                }
+
+                    $questionnaire->questions()->saveMany($questions_recupere);
+               // }
             }
 
             // Commit de la transaction si tout se passe bien
@@ -102,8 +109,24 @@ class QuestionnaireController extends Controller
 
     public function recupererQuestionnaire(Request $request): JsonResponse
     {
+    
+        $questionnaires_partielle = Questionnaire::all();
+        $questionnaire_complet = [];
 
-        return response()->json();
+        foreach($questionnaires_partielle as $questionnaire)
+        {
+            //récupération des questions du questionnaires
+            $questions = Question::where('questionnaire_id',$questionnaire->id)->get();
+            $question_reponses = [];
+            foreach($questions as $question )
+            {
+               // récupération des reponses du questionnaires   
+               $reponses = Reponse::where('question_id',$question->id)->get();
+               array_push($question_reponses,['question'=> $question,'reponses'=>$reponses]);
+            }
+            array_push($questionnaire_complet,['questionnaire' => $questionnaire , 'questions' => $question_reponses ] );
+        }
+        return response()->json(['message' => "questionnaires récupéré avec succès" , 'questionnaires' => $questionnaire_complet , 200]);
     }
 
 }
