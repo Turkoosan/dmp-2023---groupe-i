@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Reponse{
     int id;
     String reponse;
@@ -11,9 +13,18 @@ class Reponse{
 
     void set_reponse( String reponse){ this.reponse = reponse;}
     void set_reponse_est_vrai(bool reponse_est_vrai){ this.reponse_est_vrai = reponse_est_vrai;}
-    @override
-  String toString() {
-    // TODO: implement toString
-    return ' id: $id\n reponse: $reponse\n validité: $reponse_est_vrai';
-  }
+
+    
+    dynamic reponseToJson()
+    {
+        return 
+       
+        {
+          'id' : id  ,
+          'reponse' : reponse,
+          'est_correct':  reponse_est_vrai
+          };
+
+    }
+  
 }

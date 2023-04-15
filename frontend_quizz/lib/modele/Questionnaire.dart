@@ -1,17 +1,20 @@
+import 'dart:convert';
+
 import 'Theme.dart';
 import 'Question.dart';
 import 'dart:core';
 import 'Niveau.dart';
 
 class Questionnaire {
-    late int id;
-    late int id_createur;
+    int id = 0;
+    late int id_createur = 1;
     late String sujet;
+    late String theme;
     late Niveau niveau;
     List<Question> questions = [];
     List<Theme> thematiques =  [];
 
-    Questionnaire(this.id,this.id_createur,this.sujet,this.niveau);
+    Questionnaire(this.id,this.id_createur,this.sujet);
 
     Questionnaire.parDefaut();
     //Questionnaire(this.id,this.id_createur,this.sujet,this.questions);
@@ -21,7 +24,17 @@ class Questionnaire {
     List<Question> getQuestion(){ return questions;}
     List<Theme> getThematiques(){ return thematiques;}
 
+    void setSujet(String sujet) => this.sujet = sujet;
+    void setTheme(String theme) => this.theme = theme; 
+    void setCreateur(int id) => id_createur = id;
+    void ajouterNiveau(Niveau niveau){ this.niveau = niveau;}
     void ajouterQuestion(Question question){ questions.add(question);}
+    void ajouterQuestions(List<Question> _questions)
+    {  
+      for( var question in _questions) 
+        questions.add(question);
+    }
+    void modifierQuestion(int indice , Question q) => questions[indice] = q;
     void ajouterThematique(Theme theme){thematiques.add(theme);}
     void supprimerThematique(int id){thematiques.removeAt(id);}    
     void supprimerQuestion(Question question)
@@ -45,6 +58,27 @@ class Questionnaire {
             question.afficher();
         }
     }
+
+    dynamic questionnaireToJson()
+   {
+        dynamic questionsTojson = [];
+
+        for (var reponse in questions) {
+          questionsTojson.add(reponse.questionToJson());
+        }
+
+        return 
+        jsonEncode({
+
+          'questionnaire':{
+           'id': id,
+           'user_id' : id_createur,
+           'sujet':sujet,
+           'theme':theme,
+           'questions' : questionsTojson
+        }
+        });
+   }
 
     @override
   String toString() {

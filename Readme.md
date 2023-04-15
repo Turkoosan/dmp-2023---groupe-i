@@ -1,4 +1,4 @@
-***Configuration du serveur laravel***
+***(0)Configuration du serveur laravel***
 
 - éxecuter composer install
 - créer un fichier database.sqlite dans le dossier database 
@@ -40,6 +40,12 @@
     - a) on peut inscrire un utilisateur sur la vue (InscriptionPage )
     - b) on peut se connecter sur la vue (ConnexionPage)
     - Après l'action a ou b on est redirigé vers la vue menu (MenuPage)
+- 2) Le questionnaire Mvc a déjà été mis en place:
+    - a) On peut créer un questionnaires , la gestion des erreurs est aussi complète du coté flutter.
+    - Toutefois le user_id est définit arbitrairement pour faciliter le test , un changement sera fait pour ce point
+    - b) Le service permettant de récupérer l'ensemble des questionnaires a été mis en place mais il nécessaire de le convertir en list d'objet.
+    - Ensuite défint un service du coté back à fin d'obtenir les questionnaires d'un utilisateur donnée.
+    - Le service dart a déjà été implémenter.       
 
 
 ***Avancée de la database***
@@ -51,7 +57,10 @@
         - table questionnaire et question fonctionnel
         - table question et reponse fonctionnel
 
-***Comment tester les relations ?***
+***(1)Comment tester les relations ?***
 - effectuer un [php artisan db:seed] et regarder le résultat sur votre base de donnée
 
 
+**Comment tester la création de questionnaire**
+- effectuer (0) et (1)
+- pour faciliter le test la création de questionnaire est la première page visible

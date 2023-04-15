@@ -1,12 +1,18 @@
 import 'dart:convert';
 
+import 'package:frontend_quizz/modele/Question.dart';
+import 'package:frontend_quizz/modele/Questionnaire.dart';
+import 'package:frontend_quizz/modele/Reponse.dart';
 import 'package:frontend_quizz/modele/Utilisateur.dart';
 import 'package:frontend_quizz/service/AuthentifactionService.dart';
+import 'package:frontend_quizz/service/QuestionnaireService.dart';
 import 'package:frontend_quizz/vue/CreationQuestionnaire.dart';
+import 'package:frontend_quizz/vue/CreerQuestionnairePage.dart';
 import 'package:frontend_quizz/vue/InscriptionPage.dart';
 import 'package:http/http.dart' as http;
 import '../vue/ConnexionPage.dart';
 import '../vue/AccueilPage.dart';
+import 'QuestionnaireController.dart';
 
 class UtilisateurController
 {
@@ -15,6 +21,11 @@ class UtilisateurController
   late ConnexionPage connexionPage;
   late AccueilPage accueilPage;
   late CreationQuestionnaire creationQuestionnaire;
+
+
+  //controller
+  late QuestionnaireController questionnaireController ;
+  
   late var token ;
   UtilisateurController()
   {
@@ -23,9 +34,14 @@ class UtilisateurController
     accueilPage = AccueilPage(this);
     creationQuestionnaire = CreationQuestionnaire(this);
 
+
+    questionnaireController = QuestionnaireController(utilisateur);
+
   }
 
-  InscriptionPage goToPageInscription()
+  
+
+  InscriptionPage goToPageInscription ()
   {
     return inscriptionPage;
   }
@@ -40,11 +56,13 @@ class UtilisateurController
     return accueilPage;
   }
 
+
   CreationQuestionnaire goTocreateQuestionnaire()
   {
     return creationQuestionnaire;
   }
   
+  QuestionnaireController getQuestionnaireController() => questionnaireController;
 
   Utilisateur getUtilisateur(){ return utilisateur;}
   String getToken() => token.toString();

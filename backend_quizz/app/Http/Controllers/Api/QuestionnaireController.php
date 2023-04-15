@@ -17,30 +17,31 @@ class QuestionnaireController extends Controller
 
     public function ajouterQuestionnaire(Request $request): JsonResponse
     {
+
+        
         // Récupération des données du JSON
         $jsonData = $request->json()->all();
-
         // Début de la transaction pour assurer l'intégrité des données
         DB::beginTransaction();
 
         try {
             // Récupération de l'id de l'utilisateur
-            $user = User::find(intval($jsonData['user_id']));
           
             // Ajout des questionnaires et questions
-            if (isset($jsonData['questionnaires'])) {
-                $questionnaireData = $jsonData['questionnaires'];
+            if (isset($jsonData['questionnaire'])) {
+                $questionnaireData = $jsonData['questionnaire'];
               //  foreach ($questionnairesData as $questionnaireData) {
+                $user = User::find(intval($questionnaireData['user_id']));
 
                     
                     // Récupération du thème
                     $theme = null;
-                    if (isset($questionnaireData['themes'])) {
-                        $theme = Theme::where('thematique', $questionnaireData['themes'])->first();
+                    if (isset($questionnaireData['theme'])) {
+                        $theme = Theme::where('thematique', $questionnaireData['theme'])->first();
                         if (!$theme) {
                             // Si le thème n'existe pas, on le crée
                             $theme = new Theme();
-                            $theme->thematique = $questionnaireData['themes'];
+                            $theme->thematique = $questionnaireData['theme'];
                             $theme->save();
                         }
                     }

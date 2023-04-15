@@ -5,6 +5,7 @@ class Niveau
   String difficulte;
   bool debloque;
 
+
   Niveau(this.id,this.titre,this.difficulte,this.debloque);
 
   int getId()=> id;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/controller/QuestionnaireController.dart';
+import 'package:frontend_quizz/modele/Utilisateur.dart';
 
 import '../controller/UtilisateurController.dart';
 
@@ -19,7 +20,7 @@ class _MyWidgetState extends State<CreationQuestionnaire> {
   late QuestionnaireController questionnaireController;
 
   _MyWidgetState(){
-    questionnaireController = QuestionnaireController();
+    questionnaireController = QuestionnaireController(Utilisateur.parDefaut());
   }
 
 
@@ -38,7 +39,7 @@ class _MyWidgetState extends State<CreationQuestionnaire> {
   void _toggleForm() {
     setState(() {
       sujetQuestionnaire = _textController.text;
-      questionnaireController.enregistrerQuestion(themQuestion, niveauQuestion, sujetQuestionnaire);
+      //questionnaireController.enregistrerQuestion(themQuestion, niveauQuestion, sujetQuestionnaire);
       _reponses.clear();
       _showForm = !_showForm;
     });

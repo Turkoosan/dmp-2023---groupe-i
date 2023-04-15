@@ -7,7 +7,7 @@ void main() {
   UtilisateurController utilisateurController = UtilisateurController();
   runApp(MaterialApp(
       home: Scaffold(
-        body: utilisateurController.goToPageConnexion(),
+        body: utilisateurController.getQuestionnaireController().goToCreerQuestionnairePage(),
       )
   ));
 }

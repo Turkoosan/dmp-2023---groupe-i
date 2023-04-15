@@ -4,6 +4,11 @@
         android:label="frontend_quizz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        
+        <!-- Permission internet ajouté !-->
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
