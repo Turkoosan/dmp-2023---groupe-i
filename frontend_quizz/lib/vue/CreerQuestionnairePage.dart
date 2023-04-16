@@ -5,12 +5,13 @@ import 'package:frontend_quizz/controller/UtilisateurController.dart';
 import 'package:frontend_quizz/modele/Question.dart';
 import 'package:frontend_quizz/modele/Questionnaire.dart';
 import 'package:frontend_quizz/modele/Reponse.dart';
+import 'package:frontend_quizz/modele/Utilisateur.dart';
 import 'package:frontend_quizz/service/QuestionnaireService.dart';
 
 class CreerQuestionnairePage extends StatefulWidget
 {
   late QuestionnaireController questionnaireController;
-  CreerQuestionnairePage(this.questionnaireController, {super.key});
+  CreerQuestionnairePage(this.questionnaireController , {super.key});
 
 
   @override
@@ -24,7 +25,6 @@ class _CreerQuestionnairesPage extends State<CreerQuestionnairePage>
   Questionnaire q1 = Questionnaire.parDefaut();
   QuestionnaireService questionnaireService = QuestionnaireService();
   QuestionnaireController questionnaireController;
-  UtilisateurController utilisateurController = UtilisateurController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   int compteurFormQuestion = 0;
   int _formQuestionCount = 0;
@@ -144,8 +144,9 @@ class _CreerQuestionnairesPage extends State<CreerQuestionnairePage>
   @override
   Widget build(BuildContext context)
   {
+    
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.redAccent, title: const Text('Création de Questionnaire'),),
+      appBar: AppBar(title: const Text('Création de Questionnaire'),),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -239,52 +240,6 @@ class _CreerQuestionnairesPage extends State<CreerQuestionnairePage>
           ) 
           ) 
         ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        color: Colors.redAccent,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                icon: const Icon(Icons.shopping_cart),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                icon: const Icon(Icons.home),
-                color: Colors.white,
-                onPressed: (){
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute
-                      (builder: (context)=> utilisateurController.goToPageAccueil()));
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                icon: const Icon(Icons.list),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

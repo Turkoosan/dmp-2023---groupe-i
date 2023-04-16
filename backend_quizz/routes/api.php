@@ -34,10 +34,14 @@ Route::get('/recupererLevel', [\App\Http\Controllers\Api\LevelController::class,
 
 
 Route::post('/ajouterQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'ajouterQuestionnaire']);
+
+
+
 Route::get('/supprimerQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'supprimerQuestionnaire']);
 Route::get('/modifierQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'modifierQuestionnaire']);
 Route::get('/recupererQuestionnaire', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaire']);
-
+Route::get('/recupererQuestionnaire/{id_utilisateur}', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaireById']);
+Route::get('/recupererUnSeulQuestionnaire/{id_questionnaire}', [\App\Http\Controllers\Api\QuestionnaireController::class, 'recupererQuestionnaireByIdQuestionnaire']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('auth/profile', [AuthentificationController::class , 'profile'] );

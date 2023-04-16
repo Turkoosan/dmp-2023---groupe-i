@@ -6,9 +6,12 @@ import 'package:frontend_quizz/modele/Reponse.dart';
 import 'package:frontend_quizz/modele/Utilisateur.dart';
 import 'package:frontend_quizz/service/AuthentifactionService.dart';
 import 'package:frontend_quizz/service/QuestionnaireService.dart';
+import 'package:frontend_quizz/vue/Chrono.dart';
 import 'package:frontend_quizz/vue/CreationQuestionnaire.dart';
 import 'package:frontend_quizz/vue/CreerQuestionnairePage.dart';
 import 'package:frontend_quizz/vue/InscriptionPage.dart';
+import 'package:frontend_quizz/vue/ListQuestionnaires.dart';
+import 'package:frontend_quizz/vue/QuestionnaireDetailsPage.dart';
 import 'package:http/http.dart' as http;
 import '../vue/ConnexionPage.dart';
 import '../vue/AccueilPage.dart';
@@ -23,6 +26,9 @@ class UtilisateurController
   late CreationQuestionnaire creationQuestionnaire;
 
 
+  late Chrono chrono ;
+  late ListeQuestionnaires listeQuestionnaires;
+
   //controller
   late QuestionnaireController questionnaireController ;
   
@@ -33,9 +39,10 @@ class UtilisateurController
     connexionPage = ConnexionPage(this);
     accueilPage = AccueilPage(this);
     creationQuestionnaire = CreationQuestionnaire(this);
-
-
     questionnaireController = QuestionnaireController(utilisateur);
+
+    // listeQuestionnaires = ListeQuestionnaires();
+    chrono = Chrono();
 
   }
 
@@ -56,6 +63,15 @@ class UtilisateurController
     return accueilPage;
   }
 
+
+  goToListQuestionnaires() {
+    return listeQuestionnaires ;
+  }
+
+
+  goToChrono(){
+    return chrono ;
+  }
 
   CreationQuestionnaire goTocreateQuestionnaire()
   {

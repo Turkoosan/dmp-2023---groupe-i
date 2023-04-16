@@ -26,25 +26,35 @@ class QuestionnaireService
 
   }
 
-  
-  
-  Future<http.Response> getQuestionnaires() async {
-  
-  Uri uri = Uri.http('localhost:8000','/api/recupererQuestionnaire');
-  print(uri);
+  // Future<List<dynamic>> getQuestionnaires() async {
+  //   Uri uri = Uri.http('localhost:8000', '/api/recupererQuestionnaire');
+  //   http.Response response = await http.get(uri);
+  //   if (response.statusCode == 200) {
+  //     final data = jsonDecode(response.body)['questionnaires'];
+  //     if (data is List) {
+  //       return data;
+  //     } else {
+  //       throw Exception('Invalid response');
+  //     }
+  //   } else {
+  //     throw Exception('Failed to load questionnaires');
+  //   }
+  // }
 
-  Future<http.Response> req = http.get(
-    uri);
-  
-  var rep = await req ;
-  var data1_response = jsonDecode(rep.body);
-  print(rep.body);
-  print(rep.statusCode);
 
-  return rep;
+  Future<String> getQuestionnaires() async {
+
+    Uri uri = Uri.http('localhost:8000','/api/recupererQuestionnaire');
+    print(uri);
+
+    Future<http.Response> req = http.get(
+        uri);
+
+    var rep = await req ;
+    // print(rep.body);
+    return rep.body;
 
   }
-
 
   Future<http.Response> getQuestionnairesById(int utilisateur_id) async {
   
@@ -61,6 +71,17 @@ class QuestionnaireService
   return rep;
 
   }
+
+  Future<String> getQuestionsByQuestionnaireId(dynamic idQuestionnaire) async {
+    Uri uri = Uri.http('localhost:8000', '/api/recupererUnSeulQuestionnaire/${idQuestionnaire}');
+    print(uri);
+
+    Future<http.Response> req = http.get(uri);
+    var rep = await req ;
+    return rep.body;
+
+  }
+
 
 
 }
