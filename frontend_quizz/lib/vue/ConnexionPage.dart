@@ -35,84 +35,92 @@ class ConnexionPage extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Page de connexion'),
+          backgroundColor: Colors.redAccent,
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      IconButton(
-                          tooltip: "s'inscrire",
-                          onPressed:()=>
-                          {
-                            Navigator.push(
-                              context, MaterialPageRoute(builder: (context)=> utilisateurController.goToPageInscription()
-                            ),
-                            )
-                          },
-                          icon: Icon(Icons.app_registration)
-                      )
-                    ]
-                    ,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Email'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Pourriez vous entrez votre mail';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _email = value!;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Mot de Passe'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Pourriez vous entrez votre mot de passe';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _motDepasse = value!;
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          _submitForm();
-                          Future.delayed(const Duration(seconds: 1),(){
-                            if(_validation){
-
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute
-                                    (builder: (context)=> utilisateurController.goToPageAccueil()));
-                              _validation = false;
-                            }
-                          });
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Email'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Pourriez vous entrez votre mail';
                         }
+                        return null;
                       },
-                      child: Text('Connexion'),
+                      onSaved: (value) {
+                        _email = value!;
+                      },
                     ),
-                  ),
-                ],
+                    SizedBox(height: 20),
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Mot de Passe'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Pourriez vous entrez votre mot de passe';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _motDepasse = value!;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              _submitForm();
+                              Future.delayed(const Duration(seconds: 1), () {
+                                if (_validation) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          utilisateurController.goToPageAccueil(),
+                                    ),
+                                  );
+                                  _validation = false;
+                                }
+                              });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                          ),
+                          child: Text('Connexion'),
+                        ),
+                        SizedBox(width: 10),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    utilisateurController.goToPageInscription(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                          ),
+                          child: Text('Inscription'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-
           ),
         ),
       ),

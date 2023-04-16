@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_quizz/controller/UtilisateurController.dart';
 
+import '../modele/Utilisateur.dart';
+
 class AccueilPage extends StatelessWidget {
   late UtilisateurController utilisateurController;
   AccueilPage(this.utilisateurController);
@@ -76,7 +78,7 @@ class AccueilPage extends StatelessWidget {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute
-                          (builder: (context)=> utilisateurController.goTocreateQuestionnaire()));
+                          (builder: (context)=> utilisateurController.getQuestionnaireController().goToCreerQuestionnairePage()));
                   },
                 ),
               ),
@@ -116,8 +118,7 @@ class AccueilPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Arouf Gangsta',
+            Text('Pseudo',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
